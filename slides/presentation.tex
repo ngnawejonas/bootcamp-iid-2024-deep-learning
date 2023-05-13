@@ -265,10 +265,10 @@
 
 
 \title[]{Introduction to Deep Learning}
-\subtitle{Bootcamp IID 2022}
-\author[F. Paradis]{Frédérik Paradis}
-\institute{\texttt{frederik.paradis.1@ulaval.ca}}
-\date[]{2 mai 2022}
+\subtitle{Bootcamp IID 2023}
+\author[M. Godbout, A. Bouras]{Mathieu Godbout et Alexandre Bouras}
+\institute{\texttt{\{mathieu.godbout.3, alexandre.bouras.1\}@ulaval.ca}}
+\date[]{15 mai 2023}
 
 
 
@@ -280,7 +280,7 @@
 	\vspace{-10mm}
 	\begin{columns}
 		\begin{column}{0.33\textwidth}
-			\includegraphics[width=0.8\textwidth]{crdmul_en.pdf}
+			\includegraphics[width=0.8\textwidth]{iid-bleu.png}
 		\end{column}
 		\begin{column}{0.33\textwidth}
 			\includegraphics[width=0.9\textwidth]{grail.pdf}
@@ -297,27 +297,20 @@
 	\tableofcontents[subsubsectionstyle=hide/hide]
 \end{frame}
 
-\section{Who Am I?}
+\section{Who Are We?}
 
 \begin{frame}
-	\frametitle{Who Am I?}
+	\frametitle{Who Are We?}
 
 	\begin{center}
 		\begin{columns}
 			\begin{column}{0.4\textwidth}
 				\centering
-				\includegraphics[width=\textwidth]{baseline-frederik-paradis.jpg}
+				\includegraphics[width=\textwidth]{MathieuGodbout.jpg}
 			\end{column}
-			\begin{column}{0.6\textwidth}
-				\textbf{Frédérik Paradis}\\
-				\vspace{1em}
-				\includegraphics[height=1em]{logo-notext.pdf} Lead developer of Poutyne\\
-				\vspace{0.5em}
-				\includegraphics[height=1em]{ul-notext.pdf} Ph.D. Student at Université Laval\\
-				\vspace{0.5em}
-				\includegraphics[height=1em]{baseline-logo.pdf} Expert in AI at \href{https://baseline.quebec/}{Baseline}\\
-				\vspace{1em}
-				{\color{NavyBlue} \faLinkedin}~\href{https://www.linkedin.com/in/frederik-paradis/}{frederik-paradis}
+			\begin{column}{0.4\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]{AlexandreBouras.png}
 			\end{column}
 		\end{columns}
 	\end{center}
@@ -366,9 +359,9 @@
 		\only<3>{
 			\\\includegraphics[scale=0.1]{cityscape.png}\\\tiny\mCite{cordts2016cityscapes}
 		}
-		\item<4-> Image matching (e.g. facial recognition)
+		\item<4-> Image generation
 		\only<4>{
-			\\\includegraphics[scale=0.25]{facial-recognition.jpg}\\\tiny\mCite{jesorsky2001robust}
+			\\\includegraphics[scale=0.1]{ai_art_prize.jpg}
 		}
 		\item<5-> etc.
 	\end{itemize}
@@ -400,7 +393,11 @@
 		\only<3>{
 			\\\includegraphics[scale=0.1]{autocorrect.jpg}
 		}
-		\item<4-> etc.
+		\item<4-> Chatbot
+		\only<4>{
+			\\\includegraphics[scale=0.2]{chatgpt.jpg}
+		}
+		\item<5-> etc.
 	\end{itemize}
 \end{frame}
 
@@ -614,18 +611,6 @@
 \end{frame}
 
 
-\begin{frame}
-	\frametitle{Regularization}
-	To avoid overfitting (i.e. learning the training examples by heart), we may add a penalty term to the loss\footnote{MLE stands for Maximum Likehood Estimation.}:
-	$$\L(f(x), y) = \L_{\text{MLE}}(f(x), y) + \lambda\Omega(f)$$
-	\begin{itemize}
-		\item<2-> L2 regularization: $\Omega(f) = \|\theta\|_2^2$, where $\theta$ are the learneable parameters of the neural network $f$.
-		\item<3-> L1 regularization (or LASSO): $\Omega(f) = \|\theta\|_1$
-		\item<4-> etc.
-	\end{itemize}
-\end{frame}
-
-
 \section{Training}
 
 \begin{frame}
@@ -734,16 +719,60 @@
 				\onslide<2->{\For{$n$ epochs}
 					\onslide<3->{\State Let $S' = S$
 					\While{$S' \neq \emptyset$}
-						\State Draw a batch $B \subseteq S'$ of $b$ examples without replacement in $S'$.
+						\State Draw a batch $B \subseteq S'$ of $b$ examples.
 						\onslide<4->{\State $\ell = \frac{1}{b}\sum_{(x, y) \in B} \mathcal{L}(f(x; \theta), y)$}
 						\onslide<5->{\State $d = \nabla_\theta \ell$}
-						\onslide<5->{\State Update $\theta$ with $d$ using chosen optimizer (e.g.~$\theta \leftarrow \theta - \epsilon d$).}
+						\onslide<5->{\State Update $\theta$ with $d$ using chosen optimizer}
 					\EndWhile}
 				\EndFor}
 			\EndProcedure
 		\end{algorithmic}
 	\end{center}
 \end{frame}
+
+
+\section{Overfitting}
+
+\begin{frame}{Neural Networks are Powerful}
+	\begin{itemize}
+		\item<1-> Universal Approximation Theorem
+		\item<2-> ... is a \emph{blessing}!
+		\only<2>{
+			\\\includegraphics[scale=0.5]{overfitting.png}
+		}
+		\item<3-> ... and a \emph{curse}!
+		\only<3>{
+			\\\includegraphics[scale=0.5]{overfitting.png}
+		}
+		\item<4-> How can we avoid overfitting?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Regularization}
+	Add a penalty term to the loss\footnote{MLE stands for Maximum Likehood Estimation.}:
+	$$\L(f(x), y) = \L_{\text{MLE}}(f(x), y) + \lambda\Omega(f)$$
+	\begin{itemize}
+		\item<2-> L2 regularization: $\Omega(f) = \|\theta\|_2^2$, where $\theta$ are the learneable parameters of the neural network $f$.
+		\item<3-> L1 regularization (or LASSO): $\Omega(f) = \|\theta\|_1$
+		\item<4-> etc.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Dropout}
+	\includegraphics[scale=0.25]{drop-out.png}
+\end{frame}
+
+
+
+\begin{frame}
+	\frametitle{Early Stopping}
+	Extract a validation set $\mathcal{V}$ from training set. Use it to assess generalization potential.
+	\\\includegraphics[scale=0.3]{early_stopping.png}
+\end{frame}
+
 
 
 \begin{frame}
@@ -775,75 +804,6 @@
 \begin{frame}[nonum]
 	\begin{center}
 		{\Huge PyTorch Demo}
-	\end{center}
-\end{frame}
-
-\section{Convolutional Networks}
-
-\begin{frame}
-	\frametitle{Convolution Layer}
-	\only<1>{\includegraphics[scale=0.5]{cs231n/page68.pdf}}
-	\only<2>{\includegraphics[scale=0.5]{cs231n/page69.pdf}}
-	\only<3>{\includegraphics[scale=0.5]{cs231n/page70.pdf}}
-	\only<4>{\includegraphics[scale=0.5]{cs231n/page71.pdf}}
-	\only<5>{\includegraphics[scale=0.5]{cs231n/page72.pdf}}
-	\only<6>{\includegraphics[scale=0.5]{cs231n/page73.pdf}}
-	\only<7>{\includegraphics[scale=0.5]{cs231n/page74.pdf}}
-	\only<8>{\includegraphics[scale=0.5]{cs231n/page75.pdf}}
-	\only<9>{\includegraphics[scale=0.5]{cs231n/page76.pdf}}
-	\only<10>{\includegraphics[scale=0.5]{cs231n/page77.pdf}}
-	\only<11>{\includegraphics[scale=0.5]{cs231n/page78.pdf}}
-	\only<12>{\includegraphics[scale=0.5]{cs231n/page79.pdf}}
-	\only<13>{\includegraphics[scale=0.5]{cs231n/page80.pdf}}
-	\\{\tiny Slides of Fei-Fei Li, Ranjay Krishna, Danfei Xu; Standford CS231n.}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Other Types of Layers}
-	Many types of layers exist. Here is a few.
-	\begin{itemize}
-		\item Max pooling/averge pooling
-		\item Batch normalization
-		\item Dropout
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Deep Neural Network Architectures}
-	\begin{center}
-		\includegraphics[scale=0.75]{AlexNet.pdf}\\
-		AlexNet
-		\\\tiny\mCite{Krizhevsky2012ImageNetCW}
-	\end{center}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Deep Neural Network Architectures}
-	\begin{columns}
-		\begin{column}{0.3\textwidth}
-			\centering
-			\includegraphics[scale=0.37]{VGG.pdf}
-			\\VGG
-		\end{column}
-		\begin{column}{0.4\textwidth}
-			\centering
-			\includegraphics[scale=0.32]{GoogLeNet.pdf}
-			\\GoogLeNet (or Inception)
-		\end{column}
-		\begin{column}{0.3\textwidth}
-			\centering
-			\includegraphics[scale=0.37]{ResNet.pdf}
-			\\ResNet
-		\end{column}
-	\end{columns}
-	\tiny\mCite{simonyan2014very}\\
-	\tiny\mCite{szegedy2015going}\\
-	\tiny\mCite{he2016deep}
-\end{frame}
-
-\begin{frame}[nonum]
-	\begin{center}
-		{\Huge Demo}
 	\end{center}
 \end{frame}
 
@@ -1000,6 +960,68 @@
 		$$\L_{\text{CE}}(\hat{y}, y) = -\sum_{c=1}^C {\color{OliveGreen} \Id(y = c)} \log {\color{MidnightBlue} \hat{y}_c} = {\color{RedOrange} -\log \hat{y}_y}$$}
 	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Convolution Layer}
+	\only<1>{\includegraphics[scale=0.5]{cs231n/page68.pdf}}
+	\only<2>{\includegraphics[scale=0.5]{cs231n/page69.pdf}}
+	\only<3>{\includegraphics[scale=0.5]{cs231n/page70.pdf}}
+	\only<4>{\includegraphics[scale=0.5]{cs231n/page71.pdf}}
+	\only<5>{\includegraphics[scale=0.5]{cs231n/page72.pdf}}
+	\only<6>{\includegraphics[scale=0.5]{cs231n/page73.pdf}}
+	\only<7>{\includegraphics[scale=0.5]{cs231n/page74.pdf}}
+	\only<8>{\includegraphics[scale=0.5]{cs231n/page75.pdf}}
+	\only<9>{\includegraphics[scale=0.5]{cs231n/page76.pdf}}
+	\only<10>{\includegraphics[scale=0.5]{cs231n/page77.pdf}}
+	\only<11>{\includegraphics[scale=0.5]{cs231n/page78.pdf}}
+	\only<12>{\includegraphics[scale=0.5]{cs231n/page79.pdf}}
+	\only<13>{\includegraphics[scale=0.5]{cs231n/page80.pdf}}
+	\\{\tiny Slides of Fei-Fei Li, Ranjay Krishna, Danfei Xu; Standford CS231n.}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Other Types of Layers}
+	Many types of layers exist. Here is a few.
+	\begin{itemize}
+		\item Max pooling/averge pooling
+		\item Batch normalization
+		\item Dropout
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Deep Neural Network Architectures}
+	\begin{center}
+		\includegraphics[scale=0.75]{AlexNet.pdf}\\
+		AlexNet
+		\\\tiny\mCite{Krizhevsky2012ImageNetCW}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Deep Neural Network Architectures}
+	\begin{columns}
+		\begin{column}{0.3\textwidth}
+			\centering
+			\includegraphics[scale=0.37]{VGG.pdf}
+			\\VGG
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\centering
+			\includegraphics[scale=0.32]{GoogLeNet.pdf}
+			\\GoogLeNet (or Inception)
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\centering
+			\includegraphics[scale=0.37]{ResNet.pdf}
+			\\ResNet
+		\end{column}
+	\end{columns}
+	\tiny\mCite{simonyan2014very}\\
+	\tiny\mCite{szegedy2015going}\\
+	\tiny\mCite{he2016deep}
+\end{frame}
+
 
 
 \end{document}
