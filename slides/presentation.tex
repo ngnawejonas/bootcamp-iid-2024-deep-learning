@@ -266,10 +266,9 @@
 
 \title[]{Introduction to Deep Learning}
 \subtitle{Bootcamp IID 2023}
-\author[M. Godbout, A. Bouras]{Mathieu Godbout et Alexandre Bouras}
-\institute{\texttt{\{mathieu.godbout.3, alexandre.bouras.1\}@ulaval.ca}}
-\date[]{15 mai 2023}
-
+\author[J. Ngnawé]{Jonas Ngnawé}
+\institute{\texttt{\{jonas.ngnawe.1\}@ulaval.ca}}
+\date[]{06 mai 2024}
 
 
 \begin{document}
@@ -298,20 +297,24 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Who Are We?}
-
+	\frametitle{Who Am I?}
 	\begin{center}
 		\begin{columns}
 			\begin{column}{0.4\textwidth}
 				\centering
-				\includegraphics[width=\textwidth]{MathieuGodbout.jpg}
+				\includegraphics[width=\textwidth]{figures/Jonas.JPG}
 			\end{column}
-			\begin{column}{0.4\textwidth}
-				\centering
-				\includegraphics[width=\textwidth]{AlexandreBouras.png}
+			\begin{column}{0.6\textwidth}
+				\textbf{Jonas Ngnawé}\\
+				\vspace{1em}
+                \includegraphics[height=1em]{ul-notext.pdf} Ph.D. Student at Université Laval (IID \& Mila) \\
+				\vspace{0.5em}
+				\vspace{1em}
+				{\color{NavyBlue} \faLinkedin}~\href{https://www.linkedin.com/in/jonas-ngnawe-bb7712a2/}{jonas-ngnawe-bb7712a2}
 			\end{column}
 		\end{columns}
 	\end{center}
+ Slides Credit: Frédérik Paradis, Mathieu Godbout et Alexandre Bouras
 \end{frame}
 
 
@@ -398,7 +401,13 @@
 		\item<5-> etc.
 	\end{itemize}
 \end{frame}
-
+\begin{frame}{History Overview}
+	\vspace{-5mm}
+	\begin{center}
+	\includegraphics[scale=0.30] {history}
+	\end{center}
+	\vspace{-5mm}
+\end{frame}
 
 \section{Neural Networks}
 
@@ -499,6 +508,21 @@
 		\draw[curlybrace, visible on=<8->] (starthlbrace -| O-2.west) coordinate(startobrace) -- (startobrace -| O-2.east) coordinate(endobrace) node[curlybracenode] {Output (Prediction)};
 		\draw[curlybrace, visible on=<8->] ([yshift=-25pt]starthlbrace) -- ([yshift=-25pt]endobrace) node[curlybracenode] {Number of layers};
 	\end{tikzpicture}
+    $y=f_L \circ f_{L-1} \circ ... \circ f_2\circ f_1(x)$, $f_\ell=\sigma(W_{\ell-1}f_{\ell-1}+b_{\ell-1})$, $f_0=x$
+\end{frame}
+\begin{frame}{Neural Network}
+	\begin{center}
+		\begin{columns}
+			\begin{column}{0.65\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]{cnn.jpeg}
+			\end{column}
+			\begin{column}{0.35\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]{transformer.png}
+			\end{column}
+		\end{columns}
+	\end{center}
 \end{frame}
 
 
@@ -643,11 +667,11 @@
 \begin{frame}
 	\frametitle{Gradient Descent}
 	\only<1>{
-		\includegraphics[scale=0.2]{convex-gradient-descent.png}
+		\includegraphics[scale=0.3]{convex-gradient-descent2.png}
 		{\tiny From Université Laval GLO-7030 by Ludovic Trottier}
 	}
 	\only<2>{
-		\includegraphics[scale=0.8]{convex-2d-gradient-descent.png}
+		\includegraphics[scale=0.8]{figures/convex-2d-gradient-descent.png}
 		{\tiny From Université Laval GLO-7030 by Pascal Germain}
 	}
 \end{frame}
@@ -780,10 +804,17 @@
 
 \begin{frame}
 	\frametitle{Early Stopping}
-	Extract a validation set $\mathcal{V}$ from training set. Use it to assess generalization potential.
+	Extract a validation set $\mathcal{V}$ from the training set. Use it to assess generalization potential.
 	\\\includegraphics[scale=0.3]{early_stopping.png}
 \end{frame}
-
+\begin{frame}
+	\frametitle{More ways to regularize}
+	\begin{itemize}
+        \item Control the model capacity (e.g.:depth)
+	    \item More Data
+        \item Data Augmentation
+	\end{itemize}
+\end{frame}
 
 \begin{frame}
 	\frametitle{Deep Learning Libraries}
@@ -826,6 +857,7 @@
 			\item Laboratoire: \url{https://github.com/ulaval-damas/glo4030-labs}
 		\end{itemize}
 		\item Vidéos du cours CS231n: \url{https://www.youtube.com/watch?v=vT1JzLTH4G4&list=PLC1qU-LWwrF64f4QKQT-Vg5Wr4qEE1Zxk}
+        \item \href{https://karpathy.github.io/2019/04/25/recipe/}{Blogpost: A Recipe for Training Neural Networks. Andrej Karpathy}
 		\item Tutoriels et documentation de PyTorch
 		\begin{itemize}
 			\item \url{https://pytorch.org/tutorials/} (pas tout le temps les meilleures pratiques)
