@@ -265,7 +265,7 @@
 
 
 \title[]{Introduction to Deep Learning}
-\subtitle{Bootcamp IID 2023}
+\subtitle{Bootcamp IID 2024}
 \author[J. Ngnawé]{Jonas Ngnawé}
 \institute{\texttt{\{jonas.ngnawe.1\}@ulaval.ca}}
 \date[]{06 mai 2024}
@@ -661,6 +661,7 @@
 		\onslide<4->{J(\theta) &=} \onslide<3->{\expectation_{(x, y) \in \D}} \L(f(x\only<2->{; \theta}), y) \\
 		\onslide<5->{&\approx \frac{1}{N} \sum_{i=1}^N \L(f(x_i; \theta), y_i)}
 	\end{align*}
+    \onslide<6->{  $$\theta^{*}=\argmin\limits_{\theta \in \Theta} J(\theta)$$}
 \end{frame}
 
 
@@ -694,7 +695,7 @@
 
 \begin{frame}
 	\frametitle{Computation of Gradient}
-	Using \textbf{"backpropagation"}, we compute the \textbf{partial derivative} of each parameter \textbf{with respect to the loss}. The vector containing all partial derivatives is called the \textbf{gradient}.
+	Using \textbf{"backpropagation"}, we compute the \textbf{partial derivative} of \textbf{the loss} with respect to \textbf{each parameter}. The vector containing all partial derivatives is called the \textbf{gradient}.
 	$$d = \nabla_\theta J(\theta) = \left[\frac{\partial J(\theta)}{\partial \theta_1}, \dots, \frac{\partial J(\theta)}{\partial \theta_n}\right]$$
 	To update the parameters:
 	$$\theta \leftarrow \theta - \epsilon d$$
