@@ -508,7 +508,7 @@
 		\draw[curlybrace, visible on=<8->] (starthlbrace -| O-2.west) coordinate(startobrace) -- (startobrace -| O-2.east) coordinate(endobrace) node[curlybracenode] {Output (Prediction)};
 		\draw[curlybrace, visible on=<8->] ([yshift=-25pt]starthlbrace) -- ([yshift=-25pt]endobrace) node[curlybracenode] {Number of layers};
 	\end{tikzpicture}
-    \only<8>{$y=f_L \circ f_{L-1} \circ ... \circ f_2\circ f_1(x)$, $f_\ell=\sigma(W_{\ell-1}f_{\ell-1}+b_{\ell-1})$, $f_0=Id(x)$}
+    \only<8>{$y=f_L \circ f_{L-1} \circ ... \circ f_2\circ f_1(x)$, $f_\ell=\sigma(W_{\ell}f_{\ell-1}+b_{\ell})$, $f_0=x$}
 \end{frame}
 
 \begin{frame}
